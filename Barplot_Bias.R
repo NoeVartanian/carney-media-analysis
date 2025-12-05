@@ -1,4 +1,5 @@
 library(tidyverse)
+library(scales)
 library(readxl)
 all_articles <- read_excel("/Users/chrischen/Desktop/Fall 2025/COMP 370/Final Project/all_articles.xlsx")
 
@@ -28,7 +29,13 @@ g2 <- ggplot(bias,
                  y=Percentage,
                  fill = Sentiment)) +
   geom_bar(stat = "identity",position = "dodge") +
-  scale_fill_manual(values = c("Positive" = "green", "Neutral" = "grey","Negative" = "red")) + 
+  geom_text(aes(label = paste0(round(100*Percentage, 1), "%")),
+            stat = "identity",
+            position = position_dodge(width = 0.9),
+            size = 6,
+            vjust = -0.7) +
+  scale_y_continuous(labels = scales::percent,expand = expansion(mult = c(0, 0.15))) +
+  scale_fill_manual(values = c("Positive" = "green3", "Neutral" = "grey","Negative" = "red3")) + 
   ggtitle("Overall Distribution of Sentiment by Political Bias") +
   theme_linedraw(base_size = 25)
 
@@ -38,7 +45,13 @@ g3 <- ggplot(country_and_polical_bias,
                  y=Percentage,
                  fill = Sentiment)) +
   geom_bar(stat = "identity",position = "dodge") +
-  scale_fill_manual(values = c("Positive" = "green", "Neutral" = "grey","Negative" = "red")) + 
+  geom_text(aes(label = paste0(round(100*Percentage, 1), "%")),
+            stat = "identity",
+            position = position_dodge(width = 0.9),
+            size = 4,
+            vjust = -0.7) +
+  scale_y_continuous(labels = scales::percent,expand = expansion(mult = c(0, 0.15))) +
+  scale_fill_manual(values = c("Positive" = "green3", "Neutral" = "grey","Negative" = "red3")) + 
   facet_wrap(~`Country`) + 
   ggtitle("Comparative Sentiment Analysis by Political Bias") +
   theme_linedraw(base_size = 25)
