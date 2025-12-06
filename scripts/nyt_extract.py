@@ -2,7 +2,7 @@ import requests
 import csv
 import time
 
-API_KEY = "RQyvf3ktAVeaXOfk6TyRlIfNxWGe5mti"
+API_KEY = "your_api_key"
 QUERY = "Mark Carney"
 OUTPUT = "nyt_carney_p1_to_p5.csv"
 
